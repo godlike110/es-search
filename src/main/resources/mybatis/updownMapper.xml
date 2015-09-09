@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.md.search.server.dao.UpDownDao">
+	<!-- 获取所有小区偏移 -->
+	<select
+		id="getUpdowns"
+		resultType="Updown">
+		SELECT id,name,table_flx as tableFlx,region,city,dist,address,lon,lat,level_mark as levelMark,add_time as addTime from updown limit #{limit} offset #{offset}
+	</select>
+
+	<!-- 根据名称获取小区 -->
+	<select
+		id="getUpdownsByName"
+		resultType="Updown"
+		parameterType="string">
+        SELECT id,name,table_flx as tableFlx,region,city,dist,address,lon,lat,level_mark as levelMark,add_time as addTime from updown where name=#{name} and table_flx=#{city}
+	</select>
+	
+	<!-- 根据id获取小区 -->
+	<select
+		id="getUpdown"
+		resultType="Updown"
+		parameterType="string">
+        SELECT id,name,table_flx as tableFlx,region,city,dist,address,lon,lat,level_mark as levelMark,add_time as addTime from updown where id=#{id}
+	</select>
+	
+	<!-- 获取总数 -->
+	<select
+		id="getCounts"
+		resultType="Integer">
+        SELECT count(*) from updown
+	</select>
+
+</mapper>

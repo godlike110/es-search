@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.md.search.server.dao.WeixinAccountDao">
+	<!-- 获取所有小区偏移 -->
+	<select
+		id="getUpdowns"
+		resultType="Updown">
+		SELECT id,name,is_disable as isDisable,table_flx as tableFlx,region,city,dist,address,lon,lat,level_mark as levelMark,add_time as addTime from weixin_account limit #{limit} offset #{offset}
+	</select>
+
+	<!-- 根据名称获取小区 -->
+	<select
+		id="getUpdownsByName"
+		resultType="Updown"
+		parameterType="string">
+        SELECT id,name,table_flx as tableFlx,region,city,dist,address,lon,lat,level_mark as levelMark,add_time as addTime,resource_order_count as resourceOrderCount from weixin_account where name=#{name} and table_flx=#{city}
+	</select>
+	
+    <!-- 获取最近更新小区 -->
+	<select
+		id="getLatestUpdateUpdown"
+		resultType="Updown"
+		parameterType="Date">
+        SELECT id,name,is_disable as isDisable,table_flx as tableFlx,region,city,dist,address,lon,lat,level_mark as levelMark,resource_order_count as resourceOrderCount from weixin_account where update_time>=#{updateTime}
+	</select>
+	
+	<!-- 根据id获取小区 -->
+	<select
+		id="getUpdown"
+		resultType="Updown"
+		parameterType="string">
+        SELECT id,name,is_disable as isDisable,table_flx as tableFlx,region,city,dist,address,lon,lat,level_mark as levelMark from weixin_account where id=#{id}
+	</select>
+
+	<!-- 插入 -->
+    <insert
+		id="insert"
+		parameterType="Updown"
+		useGeneratedKeys="true"
+		keyProperty="id">
+		insert into
+		weixin_account(id,name,table_flx,region,city,dist,address,lon,lat,level_mark,area1,developer,management_company,management_type,management_fee,total_area,total_number,built_in,letting_rate,price,is_online)
+		values(#{id},#{name},#{tableFlx},#{region},#{city},#{dist},#{address},#{lon},#{lat},#{levelMark},#{area1},#{developer},#{managementCompany},#{managementType},#{managementFee},#{totalArea},#{totalNumber},#{builtIn},#{lettingRate},#{price},#{isOnline})
+	</insert>
+	
+	<!-- 更新小区坐标 -->
+   <update
+		id="update"
+		parameterType="Updown">
+		update weixin_account set lon=#{lon} and lat=#{lat} where id=#{id}
+	</update>
+	
+	<!-- 获取总数 -->
+	<select
+		id="getCounts"
+		resultType="Integer">
+        SELECT count(*) from weixin_account
+	</select>
+	
+	 
+</mapper>

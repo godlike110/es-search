@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.md.search.server.dao.DictCityDao">
+	<!-- 获取所有城市站点 -->
+	<select
+		id="getCities"
+		resultType="DictCity">
+		SELECT id,name,province,area_code as areaCode,voucher_rule as voucherRule from dict_city where is_open='1'
+	</select>
+
+</mapper>

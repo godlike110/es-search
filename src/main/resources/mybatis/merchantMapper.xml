@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.md.search.server.dao.MerchantDao">
+	<!-- 获取所有商户 -->
+	<select
+		id="getMerchants"
+		resultType="Merchant"
+		parameterType="string"
+		statementType="STATEMENT">
+		<![CDATA[
+		SELECT id,sort_id as sortId,title,e_title as eTitle,address,tel,mobile,pic_url as picUrl,head_pic as headPic,map_pic_url as mapPicUrl,limit_price as limitPrice,delivery_price as deliveryPrice,description,business_hours as businessHours,lon,lat,pay_type as payType,order_num as orderNum,add_time as addTime,level_mark as levelMark,service_area as serviceArea from ${table} where is_online_order='1' and is_disable='0']]>
+	</select>
+	
+	<select
+		id="getMerchant"
+		resultType="Merchant"
+		parameterType="string"
+		statementType="STATEMENT">
+		SELECT id,sort_id as sortId,title,e_title as eTitle,address,tel,mobile,pic_url as picUrl,head_pic as headPic,map_pic_url as mapPicUrl,limit_price as limitPrice,delivery_price as deliveryPrice,description,business_hours as businessHours,lon,lat,pay_type as payType,order_num as orderNum,add_time as addTime,level_mark as levelMark,service_area as serviceArea from ${table} where id='${id}' and is_online_order='1' and is_disable='0'
+	</select>
+
+</mapper>
